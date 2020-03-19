@@ -1,6 +1,8 @@
 package br.dazzi.molecularcoffeebrewing;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import br.dazzi.molecularcoffeebrewing.FluidSliderConfig.FluidSliderConfig;
@@ -12,10 +14,12 @@ public class MainActivity extends Activity {
     private FluidSliderConfig cupsBar;
     private MolecularCoffeeHandle sliderListener;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // Fluid slider - Cups Qty
         this.cupsBar = new FluidSliderConfig(0, 10, "cup", findViewById(R.id.slider_cups_qtd));
