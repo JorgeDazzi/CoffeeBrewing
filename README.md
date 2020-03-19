@@ -1,5 +1,5 @@
 # MolecularCoffeeBrewing
-Coffee Brewing following the Dazzi's receipe
+Coffee Brewing following the Dazzi's recipe
 
 
 Summary
