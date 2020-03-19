@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">‎Coffee Brewing Dz*2</string>
+    <string name="main_logo_desc">Logo Main Act</string>
+    <string name="main_cup_icon">How many cups do you want?</string>
+    <string name="main_water_icon">Water amount in  [ ml ]</string>
+</resources>
