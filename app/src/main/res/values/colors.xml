@@ -12,4 +12,7 @@
 
     <color name="cups_bar">#E5D8C6</color>
     <color name="cups_bubble">#F3E8D7</color>
+
+
+    <color name="card_bg">#6AFFFFFF</color>
 </resources>
