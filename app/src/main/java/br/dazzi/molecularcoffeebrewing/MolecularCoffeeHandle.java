@@ -2,9 +2,12 @@ package br.dazzi.molecularcoffeebrewing;
 
 import android.util.Log;
 
+import com.ramotion.fluidslider.FluidSlider;
+
 import br.dazzi.molecularcoffeebrewing.FluidSliderConfig.FluidSliderConfig;
 import br.dazzi.molecularcoffeebrewing.formula.DzFormula;
 import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 
 class MolecularCoffeeHandle {
 
@@ -18,28 +21,78 @@ class MolecularCoffeeHandle {
         this.coffeeBar = coffeeBar;
         this.cupBar = cupBar;
 
+        this.setListenerCupBar();
+        this.setListenerCoffeeBar();
         this.setListenerWaterBar();
     }
 
-    private void setListenerWaterBar(){
+    private void setListenerCupBar(){
+
         this.cupBar.getSlider().setEndTrackingListener(() -> {
 
-            //Get Cups from Water Slider bar
-            final int cups = (int)( 0 + (10 * this.cupBar.getSlider().getPosition()));
-            Log.d("Cup-Amount", ""+cups);
+            //Get Cups from Cup Slider bar
+                final int cups = this.cupBar.getSliderPosition();
+                Log.d("Cup-Amount", ""+cups);
+                Log.d("Cup-Amount-original", ""+this.cupBar.getSlider().getPosition());
 
             //Calc Coffee Grounds Amount [ g ]
-            final float coffee = this.secret.getCoffeeAmount(cups);
-            Log.d("Coffee-Amount", ""+coffee);
-            this.coffeeBar.setSliderPosition(coffee);
+                final float coffee = this.secret.getCoffeeAmountByCups(cups);
+                Log.d("Coffee-Amount", ""+coffee);
+                this.coffeeBar.setSliderPosition(coffee);
 
             //Calc Water Amount [ ml || cc ]
-            final float water = this.secret.getWaterAmount(cups);
-            Log.d("Water-Amount", ""+water);
+                final float water = this.secret.getWaterAmountByCups(cups);
+                Log.d("Water-Amount", ""+water);
+                this.waterBar.setSliderPosition(water);
+
+            return Unit.INSTANCE;
+        });
+    }
+
+    private void setListenerCoffeeBar(){
+        this.coffeeBar.getSlider().setEndTrackingListener(() -> {
+
+            //Get Coffee from Coffee Slider bar
+                final int coffee = this.coffeeBar.getSliderPosition();
+                Log.d("CB-Coffee-Amount", ""+coffee);
+
+            //Calc Cup Grounds Amount [ g ]
+                final float cup = this.secret.getCupsAmountByCoffee(coffee);
+                Log.d("CB-Cup-Amount", ""+cup);
+                this.cupBar.setSliderPosition(cup);
+
+            //Calc Water Amount [ ml || cc ]
+                final float water = this.secret.getWaterAmountByCoffee(coffee);
+                Log.d("CB-Water-Amount", ""+water);
+                this.waterBar.setSliderPosition(water);
+
+            return Unit.INSTANCE;
+        });
+    }
+
+    private void setListenerWaterBar(){
+        this.waterBar.getSlider().setEndTrackingListener(() -> {
+
+            //Get Water from Water Slider bar
+            final int water = this.waterBar.getSliderPosition();
+            Log.d("WB-Water-Amount", ""+water);
+
+            //Calc Coffee Grounds Amount [ g ]
+            final float cup = this.secret.getCupsAmountByWater(water);
+            Log.d("WB-Cup-Amount", ""+cup);
+            this.cupBar.setSliderPosition(water);
+
+            //Calc Water Amount [ ml || cc ]
+            final float coffee = this.secret.getCoffeeAmountByWater(water);
+            Log.d("WB-Coffee-Amount", ""+coffee);
             this.waterBar.setSliderPosition(water);
 
             return Unit.INSTANCE;
         });
+    }
+
+    private void setDisableListener(FluidSlider slider){
+        slider.setEndTrackingListener(() -> null);
     }
 
 }

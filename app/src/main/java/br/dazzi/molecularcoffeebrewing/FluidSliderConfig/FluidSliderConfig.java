@@ -64,6 +64,9 @@ public class FluidSliderConfig {
         });
     }
 
+    public int getSliderPosition(){
+        return (int) (this.min + (this.max * this.slider.getPosition()));
+    }
     public void setSliderPosition(float value){
         Log.d("Pos-Amount", ""+((value / this.max)));
 

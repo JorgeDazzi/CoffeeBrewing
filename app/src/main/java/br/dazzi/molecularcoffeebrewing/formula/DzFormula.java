@@ -10,22 +10,45 @@ public class DzFormula {
 
     private int coffeeGrounds = 1;
     private int pureWater = 17;
-    private int cup = 177; //ml
+    private int cup = 59; //ml
 
     public String getRatios(){
         return String.format("%s:%s",this.pureWater, this.coffeeGrounds);
     }
 
 
-    public int getCoffeeAmount(int cups){
+    public int getCoffeeAmountByCups(int cups){
         //grams
         return (int) Math.round( (this.cup * cups * 1.0) / this.pureWater );
     }
 
 
-    public int getWaterAmount(int cups){
+    public int getWaterAmountByCups(int cups){
         //ml || cc
         return (int) Math.round(this.cup * cups * 1.0);
+    }
+
+
+    public int getCoffeeAmountByWater(int water){
+        //grams
+        return (int) Math.round( water / ( this.pureWater * 1.0) );
+    }
+
+
+    public int getCupsAmountByWater(int water){
+        //ml || cc
+        return (int) Math.round ( water / (this.cup * 1.0));
+    }
+
+    public int getWaterAmountByCoffee(int coffee){
+        //grams
+        return (int) Math.round( coffee * this.pureWater * 1.0 );
+    }
+
+
+    public int getCupsAmountByCoffee(int coffee){
+        //ml || cc
+        return (int) Math.round ( (coffee * this.pureWater * 1.0) / this.cup );
     }
 
 
