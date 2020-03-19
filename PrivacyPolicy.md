@@ -1,6 +1,6 @@
 
 # Privacy Policy
--------
+
 
 Your privacy is important to us. It is Dz's policy to respect your privacy regarding any information we may collect from you across our App, https://github.com/JorgeDazzi/MolecularCoffeeBrewing, and other sites we own and operate.
 
