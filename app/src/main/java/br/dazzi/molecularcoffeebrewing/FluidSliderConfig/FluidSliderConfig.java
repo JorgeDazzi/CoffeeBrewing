@@ -58,14 +58,14 @@ public class FluidSliderConfig {
 
     private void setBubbleRange(){
         this.slider.setPositionListener(pos -> {
-            final String value = String.valueOf( (int)( this.min + (this.max * pos)));
+            final String value = String.valueOf( (int) Math.round( this.min + (this.max * pos)));
             this.slider.setBubbleText(value);
             return Unit.INSTANCE;
         });
     }
 
-    public int getSliderPosition(){
-        return (int) (this.min + (this.max * this.slider.getPosition()));
+    public float getSliderPosition(){
+        return (this.min + (this.max * this.slider.getPosition()));
     }
     public void setSliderPosition(float value){
         Log.d("Pos-Amount", ""+((value / this.max)));

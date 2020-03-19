@@ -10,45 +10,57 @@ public class DzFormula {
 
     private int coffeeGrounds = 1;
     private int pureWater = 17;
-    private int cup = 59; //ml
+    private double cup = 59.3; //ml
+
+    public String getFormula() {
+        return formula;
+    }
+
+    private String formula = "D.[Z^2] v1.5";
 
     public String getRatios(){
         return String.format("%s:%s",this.pureWater, this.coffeeGrounds);
     }
 
 
-    public int getCoffeeAmountByCups(int cups){
+    public float getCoffeeAmountByCups(float cups){
         //grams
         return (int) Math.round( (this.cup * cups * 1.0) / this.pureWater );
+        //return (float) ((this.cup * cups * 1.0) / this.pureWater);
     }
 
 
-    public int getWaterAmountByCups(int cups){
+    public float getWaterAmountByCups(float cups){
         //ml || cc
-        return (int) Math.round(this.cup * cups * 1.0);
+        return (float) Math.round(this.cup * cups * 1.0);
+        //return (float) (this.cup * cups * 1.0);
     }
 
 
-    public int getCoffeeAmountByWater(int water){
+    public float getCoffeeAmountByWater(float water){
         //grams
         return (int) Math.round( water / ( this.pureWater * 1.0) );
+        //return (float) (water / ( this.pureWater * 1.0));
     }
 
 
-    public int getCupsAmountByWater(int water){
+    public float getCupsAmountByWater(float water){
         //ml || cc
         return (int) Math.round ( water / (this.cup * 1.0));
+        //return (float) ( water / (this.cup * 1.0));
     }
 
-    public int getWaterAmountByCoffee(int coffee){
+    public float getWaterAmountByCoffee(float coffee){
         //grams
-        return (int) Math.round( coffee * this.pureWater * 1.0 );
+        return (int) Math.ceil( coffee * this.pureWater * 1.0 );
+        //return (float) ( coffee * this.pureWater * 1.0 );
     }
 
 
-    public int getCupsAmountByCoffee(int coffee){
+    public float getCupsAmountByCoffee(float coffee){
         //ml || cc
-        return (int) Math.round ( (coffee * this.pureWater * 1.0) / this.cup );
+        return (int) Math.ceil ( (coffee * this.pureWater * 1.0) / this.cup );
+        //return (float) ( (coffee * this.pureWater * 1.0) / this.cup * 1.0 );
     }
 
 

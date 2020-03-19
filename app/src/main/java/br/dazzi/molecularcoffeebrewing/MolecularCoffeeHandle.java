@@ -31,7 +31,7 @@ class MolecularCoffeeHandle {
         this.cupBar.getSlider().setEndTrackingListener(() -> {
 
             //Get Cups from Cup Slider bar
-                final int cups = this.cupBar.getSliderPosition();
+                final float cups = this.cupBar.getSliderPosition();
                 Log.d("Cup-Amount", ""+cups);
                 Log.d("Cup-Amount-original", ""+this.cupBar.getSlider().getPosition());
 
@@ -53,7 +53,7 @@ class MolecularCoffeeHandle {
         this.coffeeBar.getSlider().setEndTrackingListener(() -> {
 
             //Get Coffee from Coffee Slider bar
-                final int coffee = this.coffeeBar.getSliderPosition();
+                final float coffee = this.coffeeBar.getSliderPosition();
                 Log.d("CB-Coffee-Amount", ""+coffee);
 
             //Calc Cup Grounds Amount [ g ]
@@ -74,18 +74,18 @@ class MolecularCoffeeHandle {
         this.waterBar.getSlider().setEndTrackingListener(() -> {
 
             //Get Water from Water Slider bar
-            final int water = this.waterBar.getSliderPosition();
+            final float water = this.waterBar.getSliderPosition();
             Log.d("WB-Water-Amount", ""+water);
 
             //Calc Coffee Grounds Amount [ g ]
             final float cup = this.secret.getCupsAmountByWater(water);
             Log.d("WB-Cup-Amount", ""+cup);
-            this.cupBar.setSliderPosition(water);
+            this.cupBar.setSliderPosition(cup);
 
             //Calc Water Amount [ ml || cc ]
             final float coffee = this.secret.getCoffeeAmountByWater(water);
             Log.d("WB-Coffee-Amount", ""+coffee);
-            this.waterBar.setSliderPosition(water);
+            this.coffeeBar.setSliderPosition(coffee);
 
             return Unit.INSTANCE;
         });
