@@ -1,6 +1,6 @@
 package br.dazzi.molecularcoffeebrewing.ListenerHandle;
 
-import br.dazzi.molecularcoffeebrewing.FluidSliderConfig.FluidSliderConfig;
+import br.dazzi.molecularcoffeebrewing.FluidSliderConfig.FluidConfig;
 import br.dazzi.molecularcoffeebrewing.formula.Formula;
 import br.dazzi.molecularcoffeebrewing.formula.Recipe;
 import kotlin.Unit;
@@ -10,11 +10,11 @@ public class ListenerHandle {
 
     @Setter
     private Formula formula;
-    private FluidSliderConfig waterBar;
-    private FluidSliderConfig coffeeBar;
-    private FluidSliderConfig cupBar;
+    private FluidConfig waterBar;
+    private FluidConfig coffeeBar;
+    private FluidConfig cupBar;
 
-    public ListenerHandle(FluidSliderConfig waterBar, FluidSliderConfig coffeeBar, FluidSliderConfig cupBar, Formula formula) {
+    public ListenerHandle(FluidConfig waterBar, FluidConfig coffeeBar, FluidConfig cupBar, Formula formula) {
         this.waterBar = waterBar;
         this.coffeeBar = coffeeBar;
         this.cupBar = cupBar;
@@ -26,11 +26,11 @@ public class ListenerHandle {
     }
 
 
-    private void setListener(FluidSliderConfig fluid){
+    private void setListener(FluidConfig fluid){
 
         fluid.getSlider().setEndTrackingListener( () -> {
 
-            float amount = fluid.getSliderPostion();
+            float amount = fluid.getSliderPosition();
             Recipe recipe = this.formula.getProportion(fluid.getName(), amount);
 
             this.cupBar.setSliderPosition(recipe.getCups());

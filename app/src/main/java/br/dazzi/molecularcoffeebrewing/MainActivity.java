@@ -8,15 +8,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import br.dazzi.molecularcoffeebrewing.FluidSliderConfig.FluidSliderConfig;
+import br.dazzi.molecularcoffeebrewing.FluidSliderConfig.FluidConfig;
 import br.dazzi.molecularcoffeebrewing.ListenerHandle.ListenerHandle;
 import br.dazzi.molecularcoffeebrewing.formula.RosiechenFormula;
 
 public class MainActivity extends Activity {
 
-    private FluidSliderConfig coffeeBar;
-    private FluidSliderConfig waterBar;
-    private FluidSliderConfig cupsBar;
+    private FluidConfig coffeeBar;
+    private FluidConfig waterBar;
+    private FluidConfig cupsBar;
     private ListenerHandle sliderListener;
     private RosiechenFormula rosieCrema;
 
@@ -27,23 +27,32 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-
-
-
-
         //Set Formula
             this.rosieCrema = new RosiechenFormula();
 
-        // Fluid slider - Cups Qty
-            this.cupsBar = new FluidSliderConfig(0, this.rosieCrema.getMaxCup(), "cup", findViewById(R.id.slider_cups_qtd), "Cup");
+        // Set Cup Slider
+            this.cupsBar = new FluidConfig( findViewById( R.id.slider_cups_qtd ) )
+                .setMax( this.rosieCrema.getMaxCup() )
+                .setName( "Cup" )
+                .setUnit( this.rosieCrema.getRatio().getCupUnit() )
+                .build();
 
-        // Fluid slider - Water Amount
-            this.waterBar = new FluidSliderConfig(0, this.rosieCrema.getMaxWater(), "ml", findViewById(R.id.slider_water),"Water",true);
+        // Set Coffee Slider
+            this.coffeeBar = new FluidConfig( findViewById( R.id.slider_coffee_beans ) )
+                 .setMax( this.rosieCrema.getMaxCoffee() )
+                 .setUnit( this.rosieCrema.getRatio().getCoffeeUnit() )
+                 .setName( "Coffee" )
+                 .setSliderEnable( true )
+                 .build();
 
-        // Fluid slider - Coffee Amount
-            this.coffeeBar = new FluidSliderConfig(0, this.rosieCrema.getMaxCoffee(), "g", findViewById(R.id.slider_coffee_beans), "Coffee",true);
+            this.waterBar = new FluidConfig( findViewById( R.id.slider_water ) )
+                .setMax( this.rosieCrema.getMaxWater() )
+                .setName( "Water" )
+                .setUnit( this.rosieCrema.getRatio().getWaterUnit() )
+                .setSliderEnable( true )
+                .build();
 
-        // Set listeners handle
+        // Set Listeners
             this.sliderListener = new ListenerHandle(this.waterBar, this.coffeeBar, this.cupsBar, this.rosieCrema);
     }
 
