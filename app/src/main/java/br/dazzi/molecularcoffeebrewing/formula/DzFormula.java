@@ -11,12 +11,11 @@ public class DzFormula {
     private int coffeeGrounds = 1;
     private int pureWater = 17;
     private double cup = 59.3; //ml
+    private String formula = "D.[Z^2] v1.5";
 
     public String getFormula() {
         return formula;
     }
-
-    private String formula = "D.[Z^2] v1.5";
 
     public String getRatios(){
         return String.format("%s:%s",this.pureWater, this.coffeeGrounds);

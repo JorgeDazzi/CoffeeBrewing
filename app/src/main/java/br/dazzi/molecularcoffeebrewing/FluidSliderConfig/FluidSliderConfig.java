@@ -1,25 +1,29 @@
 package br.dazzi.molecularcoffeebrewing.FluidSliderConfig;
 
 import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-
 import com.ramotion.fluidslider.FluidSlider;
-
 import kotlin.Unit;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class FluidSliderConfig {
 
     private FluidSlider slider;
     private int min;
     private int max;
     private String measure;
+    private String name;
 
-    public FluidSliderConfig(int min, int max, String measure, FluidSlider slider){
+    public FluidSliderConfig(int min, int max, String measure, FluidSlider slider, String name){
         this.min = min;
         this.max = max;
         this.slider = slider;
         this.measure = measure;
+        this.name = name;
 
         this.setSliderEndText();
         this.setSliderStartText();
@@ -28,11 +32,12 @@ public class FluidSliderConfig {
         this.slider.setPosition(0);
     }
 
-    public FluidSliderConfig(int min, int max, String measure, FluidSlider slider, boolean touchEnable){
+    public FluidSliderConfig(int min, int max, String measure, FluidSlider slider, String name, boolean touchEnable){
         this.min = min;
         this.max = max;
         this.slider = slider;
         this.measure = measure;
+        this.name = name;
 
         this.setSliderEndText();
         this.setSliderStartText();
@@ -64,7 +69,7 @@ public class FluidSliderConfig {
         });
     }
 
-    public float getSliderPosition(){
+    public float getSliderPostion(){
         return (this.min + (this.max * this.slider.getPosition()));
     }
     public void setSliderPosition(float value){
@@ -79,19 +84,9 @@ public class FluidSliderConfig {
 
     private void setSliderEnable(boolean enable){
         if(!enable) {
-            this.slider.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return true;
-                }
-            });
+            this.slider.setOnTouchListener((v, event) -> true);
         }else {
-            this.slider.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return false;
-                }
-            });
+            this.slider.setOnTouchListener((v, event) -> false);
         }
     }
 }
