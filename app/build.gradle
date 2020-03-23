@@ -8,8 +8,8 @@ android {
         applicationId "br.dazzi.molecularcoffeebrewing"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 3
-        versionName "Rosie, The Spider-Cat I.1/2"
+        versionCode 4
+        versionName "Rosie, The Spider-Cat I.3/4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

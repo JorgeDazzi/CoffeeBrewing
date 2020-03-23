@@ -10,7 +10,7 @@ public class RosiechenFormula extends Formula {
                 1,
                 "g",
                 59,
-                "ml"
+                "Cup"
                 ),
                 59,
                 30,
